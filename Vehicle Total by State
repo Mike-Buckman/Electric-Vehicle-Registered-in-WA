@@ -1,15 +1,17 @@
 SELECT
-evp.State 
-,evp.County
-,evp."Model Year" 
-,evp.Make 
-,evp.Model
-,COUNT (DISTINCT evp."VIN (1-10)" ) AS TTL_VEHICLES 
+  evp.State 
+  evp.County,
+  evp."Model Year" ,
+  evp.Make ,
+  evp.Model,
+  ,COUNT (DISTINCT evp."VIN (1-10)" ) AS TTL_VEHICLES 
 FROM 
-Electric_Vehicle_Population evp 
-GROUP BY evp.State 
-,evp.County
-,evp."Model Year" 
-,evp.Model
-,evp.Make 
-ORDER BY EVP.County ASC
+  Electric_Vehicle_Population evp 
+GROUP BY 
+  evp.State, 
+  evp.County,
+  evp."Model Year", 
+  evp.Model,
+  evp.Make 
+ORDER BY 
+  EVP.County ASC
