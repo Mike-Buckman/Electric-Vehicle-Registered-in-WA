@@ -1,9 +1,14 @@
 select 
-evp.Make  
-,evp.Model 
-,evp."Model Year" 
-,max (evp."Electric Range" ) as max_range
-from Electric_Vehicle_Population evp 
-where evp."Electric Range" <> 0
-group by evp.Make , evp.Model , evp."Model Year" 
+  evp.Make, 
+  evp.Model, 
+  evp."Model Year", 
+  max (evp."Electric Range" ) as max_range
+from 
+  Electric_Vehicle_Population evp 
+where
+  evp."Electric Range" <> 0
+group by 
+  evp.Make,
+  evp.Model,
+  evp."Model Year" 
 order by evp."Model Year" desc
