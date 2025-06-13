@@ -5,11 +5,14 @@ SELECT
 	ttl,
 	rnk
 FROM
+--CREATE RANK SUBQUERY BY COUNT OF VN
 (SELECT 
 	evp.city,
 	evp.make,
 	evp.Model, 
+--TOTAL VN AGG
 	COUNT(distinct evp."VIN (1-10)") as ttl,
+--RANK OF TTL BY CITY
 	ROW_NUMBER() over (PARTITION BY evp.city ORDER BY COUNT( distinct evp."VIN (1-10)") DESC) as rnk
 FROM 
 Electric_Vehicle_Population evp 
@@ -19,5 +22,6 @@ GROUP BY
 	evp.city,
 	evp.make,
 	evp.Model) AS ev_by_city
+--SELECT TOP 5 RANK FROM RANK SUBQUERY
 WHERE rnk <= 5 
 ORDER BY  city, rnk ASC
