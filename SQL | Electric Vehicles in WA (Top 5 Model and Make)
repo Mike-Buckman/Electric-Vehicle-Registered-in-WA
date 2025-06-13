@@ -1,0 +1,23 @@
+SELECT 
+	city,
+	make,
+	Model,
+	ttl,
+	rnk
+FROM
+(SELECT 
+	evp.city,
+	evp.make,
+	evp.Model, 
+	COUNT(distinct evp."VIN (1-10)") as ttl,
+	ROW_NUMBER() over (PARTITION BY evp.city ORDER BY COUNT( distinct evp."VIN (1-10)") DESC) as rnk
+FROM 
+Electric_Vehicle_Population evp 
+where 
+	evp.state = 'WA'
+GROUP BY
+	evp.city,
+	evp.make,
+	evp.Model) AS ev_by_city
+WHERE rnk <= 5 
+ORDER BY  city, rnk ASC
