@@ -17,5 +17,5 @@ GROUP BY
 	evp.city,
 	evp.make,
 	evp.model) AS ev_by_city
-WHERE rnk = 1 
+WHERE rnk <= 10
 ORDER BY state, rnk asc
